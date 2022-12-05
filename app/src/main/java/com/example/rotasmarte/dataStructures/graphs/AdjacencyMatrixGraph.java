@@ -43,7 +43,7 @@ public class AdjacencyMatrixGraph<T> {
         if (algorithm.equals(Algorithm.DIJKSTRA))
             return new DijkstrasAlgorithm(adjacencyMatrix).run(start, destination);
 
-        throw new NotImplementedError();
+        return new BacktrackingAlgorithm(adjacencyMatrix).run(start, destination);
     }
 
     private class DijkstrasAlgorithm {
@@ -173,7 +173,7 @@ public class AdjacencyMatrixGraph<T> {
             return ret;
         }
 
-        public LinkedList<T> search(T current) {
+        private LinkedList<T> search(T current) {
             if (current.equals(destination)) {
                 LinkedList<T> ret = new LinkedList<T>();
                 ret.addFirst(destination);
