@@ -1,6 +1,9 @@
-package com.example.rotasmarte;
+package com.example.rotasmarte.dataStructures.graphs;
 
 import android.widget.EditText;
+
+import com.example.rotasmarte.DistOriginal;
+import com.example.rotasmarte.Vertice;
 
 import java.util.Stack;
 
