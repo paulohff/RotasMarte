@@ -18,12 +18,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 
 public class Main extends AppCompatActivity {
+
+
 
     public static  final String jsonCidades = "{\"cidades\":"+
     "[" +
@@ -133,7 +139,15 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela);
         ////////////////////////////////
+        String jsonCidadess = Utils.getJsonFromAssets(getApplicationContext(), "cidades.json");
+        Gson gson = new Gson();
+        Type listUserType = new TypeToken<List<Cidade>>() { }.getType();
 
+        List<Cidade> users = gson.fromJson(jsonCidadess, listUserType);
+
+        for(int i = 0; i < users.size() ; i++) {
+            Log.i("data", "> Item " + i + "\n" + users.get(i));
+        }
       // minhaview = new MinhaView(this);
        //setContentView(minhaview);
         imgMapa = (ImageView)findViewById(R.id.imgMapa);
@@ -157,15 +171,15 @@ public class Main extends AppCompatActivity {
             JSONArray arrayCidades = cidades.getJSONArray("cidades");
             for (int i = 0; i < arrayCidades.length() - 1; i++) {
                 JSONObject cidade = arrayCidades.getJSONObject(i);
-                Log.d("Main", cidade.getString("nomeCidade"));
-                Log.d("Main", Double.toString(cidade.getDouble("coordenadaX")));
-                Log.d("Main", Double.toString(cidade.getDouble("coordenadaY")));
+               // Log.d("Main", cidade.getString("nomeCidade"));
+               // Log.d("Main", Double.toString(cidade.getDouble("coordenadaX")));
+              //  Log.d("Main", Double.toString(cidade.getDouble("coordenadaY")));
 
                 adapterCidades.add(cidade.getString("nomeCidade"));
 
                // Cidade novaCidade = new Cidade(nome, coordX, coordY, indice);
-                Cidade novaCidade = new Cidade(cidade.getString("nomeCidade"), cidade.getDouble("coordenadaX"), cidade.getDouble("coordenadaY"));
-                vetorCidades.add(novaCidade);
+                //Cidade novaCidade = new Cidade(cidade.getString("nomeCidade"), cidade.getDouble("coordenadaX"), cidade.getDouble("coordenadaY"));
+                //vetorCidades.add(novaCidade);
                 oGrafo.NovoVertice(cidade.getString("nomeCidade"));
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, adapterCidades);

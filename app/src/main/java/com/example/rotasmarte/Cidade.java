@@ -1,43 +1,62 @@
 package com.example.rotasmarte;
 
+import java.util.List;
+
 public class Cidade {
 
-    private String nome;
-    private Double cordX, cordY;
-
+    private String nomeCidade;
+    private Double coordenadaX, coordenadaY;
+    List<String> mensagens;
+/*
     public Cidade() throws Exception {
-        nome = "";
-        cordX = 0.0;
-        cordY = 0.0;
+        nomeCidade = "";
+        coordenadaX = 0.0;
+        coordenadaY = 0.0;
     }
 
     public Cidade(String nome) throws Exception {
-        this.nome = nome;
-        cordX = 0.0;
-        cordY = 0.0;
+        this.nomeCidade = nome;
+        coordenadaX = 0.0;
+        coordenadaY = 0.0;
     }
 
     public Cidade(String nome, double coordX, double coordY) throws Exception {
-        this.nome = nome;
-        this.cordX = coordX;
-        this.cordY = coordY;
+        this.nomeCidade = nome;
+        this.coordenadaX = coordX;
+        this.coordenadaY = coordY;
     }
-
+*/
     public String Nome()
     {
-        return nome;
+        return nomeCidade;
     }
 
     public double CoordX()
     {
-       return cordX;
+       return coordenadaX;
     }
 
     public double CoordY()
     {
-        return cordY;
+        return  coordenadaY;
     }
 
+    public List<String> getMessages() {
+        return mensagens;
+    }
+
+    public void setMessages(List<String> messages) {
+        this.mensagens = mensagens;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + nomeCidade + '\'' +
+                ", X=" + coordenadaX +
+                ", Y=" +  coordenadaY +
+                '}';
+    }
     /*
     public int CompareTo(Cidade outraCidade)
     {
