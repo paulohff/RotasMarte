@@ -130,7 +130,7 @@ public class AdjacencyMatrixGraph<T> {
                 currentNode = notVisited.get(nextIndex);
             }
 
-            if (notVisited.isEmpty())
+            if (notVisited.isEmpty() || !currentNode.equals(new Node(destination)))
                 throw new Exception("Path not found");
 
             LinkedList<T> ret = new LinkedList<T>();
