@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.rotasmarte.dataStructures.matrices.KeyMatrix;
+import com.example.rotasmarte.dataStructures.matrices.Matrix;
+
 import kotlin.NotImplementedError;
 
 public class AdjacencyMatrixGraph<T> {
@@ -150,6 +152,48 @@ public class AdjacencyMatrixGraph<T> {
             for (Node node : notVisited)
                 if (node.compareTo(ret) < 0)
                     ret = node;
+
+            return ret;
+        }
+    }
+
+    private class BacktrackingAlgorithm {
+        private KeyMatrix<T, Double> adjacencyMatrix;
+        private T destination;
+        public BacktrackingAlgorithm(@NonNull KeyMatrix<T, Double> adjacencyMatrix) {
+            this.adjacencyMatrix = adjacencyMatrix;
+        }
+
+        public LinkedList<T> run(T start, T destination) throws Exception {
+            this.destination = destination;
+            LinkedList<T> ret = search(start);
+            if (ret == null)
+                throw new Exception("Path not found");
+
+            return ret;
+        }
+
+        public LinkedList<T> search(T current) {
+            if (current.equals(destination)) {
+                LinkedList<T> ret = new LinkedList<T>();
+                ret.addFirst(destination);
+                return ret;
+            }
+
+            Double[] adjacent = adjacencyMatrix.getRow(current);
+            LinkedList<T> ret = null;
+            for (int i = 0; i < adjacencyMatrix.HEIGHT; i++) {
+                Double el = adjacent[i];
+                if (el == null)
+                    continue;
+
+                ret = search(adjacencyMatrix.getColKeys()[i]);
+                if (ret == null)
+                    continue;
+
+                ret.addFirst(current);
+                break;
+            }
 
             return ret;
         }

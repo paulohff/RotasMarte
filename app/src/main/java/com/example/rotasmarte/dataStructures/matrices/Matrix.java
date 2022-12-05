@@ -124,4 +124,8 @@ public class Matrix<T> implements Iterable<T>, Cloneable {
         }
         return t;
     }
+
+    public T[] getRow(int index) {
+        return (T[]) matrix[index];
+    }
 }

@@ -100,4 +100,8 @@ public class KeyMatrix<K, T> extends Matrix<T> {
             throw new NoSuchElementException("\"" + row.toString() + "\" is not a key.");
         super.setValue(value, ridx, cidx);
     }
+
+    public T[] getRow(K key) {
+        return super.getRow(Arrays.asList(rowKeys).indexOf(key));
+    }
 }
